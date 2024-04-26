@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:daily_pedometer2/pedometer.dart';
+import 'package:daily_pedometer2/daily_pedometer2.dart';
 
 String formatDate(DateTime d) {
   return d.toString().substring(0, 19);
@@ -57,10 +57,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initPlatformState() {
-    _pedestrianStatusStream = Pedometer.pedestrianStatusStream;
+    _pedestrianStatusStream = DailyPedometer2.pedestrianStatusStream;
     _pedestrianStatusStream.listen(onPedestrianStatusChanged).onError(onPedestrianStatusError);
 
-    _stepCountStream = Pedometer.stepCountStream;
+    _stepCountStream = DailyPedometer2.stepCountStream;
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
 
     if (!mounted) return;
