@@ -1,3 +1,7 @@
+## 1.0.8
+
+-   removed gitignore files
+
 ## 1.0.7
 
 -   ios & android plugins updated
