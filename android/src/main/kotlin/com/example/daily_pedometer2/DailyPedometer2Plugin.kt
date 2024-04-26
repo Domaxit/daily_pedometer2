@@ -1,4 +1,4 @@
-package com.example.pedometer
+package com.example.daily_pedometer2
 
 import android.hardware.Sensor
 import android.hardware.SensorEventListener
@@ -7,8 +7,8 @@ import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel
 
-/** PedometerPlugin */
-class PedometerPlugin : FlutterPlugin {
+/** DailyPedometer2Plugin */
+class DailyPedometer2Plugin : FlutterPlugin {
     private lateinit var stepDetectionChannel: EventChannel
     private lateinit var stepCountChannel: EventChannel
 

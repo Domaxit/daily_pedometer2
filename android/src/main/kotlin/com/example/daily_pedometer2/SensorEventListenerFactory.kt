@@ -1,4 +1,4 @@
-package com.example.pedometer
+package com.example.daily_pedometer2
 
 
 import android.hardware.Sensor

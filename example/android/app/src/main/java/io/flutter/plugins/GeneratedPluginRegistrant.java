@@ -16,9 +16,9 @@ public final class GeneratedPluginRegistrant {
   private static final String TAG = "GeneratedPluginRegistrant";
   public static void registerWith(@NonNull FlutterEngine flutterEngine) {
     try {
-      flutterEngine.getPlugins().add(new com.example.pedometer.PedometerPlugin());
+      flutterEngine.getPlugins().add(new com.example.daily_pedometer2.DailyPedometer2Plugin());
     } catch (Exception e) {
-      Log.e(TAG, "Error registering plugin daily_pedometer2, com.example.pedometer.PedometerPlugin", e);
+      Log.e(TAG, "Error registering plugin daily_pedometer2, com.example.daily_pedometer2.DailyPedometer2Plugin", e);
     }
   }
 }

@@ -1,4 +1,4 @@
-group 'com.example.pedometer'
+group 'com.example.daily_pedometer2'
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -47,7 +47,7 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    namespace "com.example.pedometer"
+    namespace "com.example.daily_pedometer2"
 }
 
 dependencies {

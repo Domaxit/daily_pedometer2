@@ -3,7 +3,7 @@ import UIKit
 
 import CoreMotion
 
-public class SwiftPedometerPlugin: NSObject, FlutterPlugin {
+public class DailyPedometer2Plugin: NSObject, FlutterPlugin {
 
     // Register Plugin
     public static func register(with registrar: FlutterPluginRegistrar) {
