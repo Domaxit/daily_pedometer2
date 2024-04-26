@@ -1,7 +1,7 @@
 name: daily_pedometer2
 description: A Pedometer and Step Detection package for Android and iOS. Step count are daily and streamed as the platform updates it.
-version: 1.0.1
-homepage: https://github.com/cph-cachet/flutter-plugins
+version: 1.0.2
+homepage: https://github.com/matiniiuu/daily_pedometer2
 
 environment:
     sdk: ">=2.17.0 <4.0.0"

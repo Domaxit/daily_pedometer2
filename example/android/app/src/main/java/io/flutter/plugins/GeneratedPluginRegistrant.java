@@ -18,7 +18,7 @@ public final class GeneratedPluginRegistrant {
     try {
       flutterEngine.getPlugins().add(new com.example.pedometer.PedometerPlugin());
     } catch (Exception e) {
-      Log.e(TAG, "Error registering plugin pedometer, com.example.pedometer.PedometerPlugin", e);
+      Log.e(TAG, "Error registering plugin daily_pedometer2, com.example.pedometer.PedometerPlugin", e);
     }
   }
 }

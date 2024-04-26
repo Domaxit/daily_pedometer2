@@ -6,10 +6,10 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<pedometer/PedometerPlugin.h>)
-#import <pedometer/PedometerPlugin.h>
+#if __has_include(<daily_pedometer2/PedometerPlugin.h>)
+#import <daily_pedometer2/PedometerPlugin.h>
 #else
-@import pedometer;
+@import daily_pedometer2;
 #endif
 
 @implementation GeneratedPluginRegistrant

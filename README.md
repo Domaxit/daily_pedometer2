@@ -48,7 +48,7 @@ In the case that the step sensor is not available, an error will be thrown. The 
 
 ## Example Usage
 
-See the [example app](https://github.com/cph-cachet/flutter-plugins/blob/master/packages/pedometer/example/lib/main.dart) for a fully-fledged example.
+See the [example app](https://github.com/matiniiuu/daily_pedometer2/blob/master/packages/pedometer/example/lib/main.dart) for a fully-fledged example.
 
 Below is shown a more generalized example. Remember to set the required permissions, as described above. This may require you to manually allow the permission in the "Settings" on the phone.
 
