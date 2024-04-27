@@ -8,6 +8,7 @@ const int _stopped = 0, _walking = 1;
 class DailyPedometer2 {
   static const EventChannel _stepDetectionChannel = const EventChannel('step_detection');
   static const EventChannel _stepCountChannel = const EventChannel('step_count');
+  static const EventChannel _dailyStepCountChannel = const EventChannel('daily_step_count');
 
   static StreamController<PedestrianStatus> _androidPedestrianController = StreamController.broadcast();
 
@@ -57,6 +58,10 @@ class DailyPedometer2 {
   /// Returns the steps taken since last system boot.
   /// Events may come with a delay.
   static Stream<StepCount> get stepCountStream => _stepCountChannel.receiveBroadcastStream().map((event) => StepCount._(event));
+
+  /// Returns the daily steps.
+  /// Events may come with a delay.
+  static Stream<StepCount> get dailyStepCountStream => _dailyStepCountChannel.receiveBroadcastStream().map((event) => StepCount._(event));
 }
 
 /// A DTO for steps taken containing the number of steps taken.
