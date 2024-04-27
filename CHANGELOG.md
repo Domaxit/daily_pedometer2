@@ -1,3 +1,7 @@
+## 1.0.9
+
+-   added daily step counter channel
+
 ## 1.0.8
 
 -   removed gitignore files
