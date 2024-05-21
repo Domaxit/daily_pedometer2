@@ -1,3 +1,7 @@
+## 1.1.2
+
+-   fixed dependencies
+
 ## 1.1.1
 
 -   fixed android bugs

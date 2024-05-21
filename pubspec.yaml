@@ -1,6 +1,6 @@
 name: daily_pedometer2
 description: A Pedometer and Step Detection package for Android and iOS. Step count are daily and streamed as the platform updates it.
-version: 1.1.1
+version: 1.1.2
 homepage: https://github.com/matiniiuu/daily_pedometer2
 
 environment:

@@ -6,22 +6,29 @@ import 'dart:io' show Platform;
 const int _stopped = 0, _walking = 1;
 
 class DailyPedometer2 {
-  static const EventChannel _stepDetectionChannel = const EventChannel('step_detection');
-  static const EventChannel _stepCountChannel = const EventChannel('step_count');
-  static const EventChannel _dailyStepCountChannel = const EventChannel('daily_step_count');
+  static const EventChannel _stepDetectionChannel =
+      const EventChannel('step_detection');
+  static const EventChannel _stepCountChannel =
+      const EventChannel('step_count');
+  static const EventChannel _dailyStepCountChannel =
+      const EventChannel('daily_step_count');
 
-  static StreamController<PedestrianStatus> _androidPedestrianController = StreamController.broadcast();
+  static StreamController<PedestrianStatus> _androidPedestrianController =
+      StreamController.broadcast();
 
   /// Returns one step at a time.
   /// Events come every time a step is detected.
   static Stream<PedestrianStatus> get pedestrianStatusStream {
-    Stream<PedestrianStatus> stream = _stepDetectionChannel.receiveBroadcastStream().map((event) => PedestrianStatus._(event));
+    Stream<PedestrianStatus> stream = _stepDetectionChannel
+        .receiveBroadcastStream()
+        .map((event) => PedestrianStatus._(event));
     if (Platform.isAndroid) return _androidStream(stream);
     return stream;
   }
 
   /// Transformed stream for the Android platform
-  static Stream<PedestrianStatus> _androidStream(Stream<PedestrianStatus> stream) {
+  static Stream<PedestrianStatus> _androidStream(
+      Stream<PedestrianStatus> stream) {
     /// Init a timer and a status
     Timer? t;
     int? pedestrianStatus;
@@ -57,11 +64,15 @@ class DailyPedometer2 {
 
   /// Returns the steps taken since last system boot.
   /// Events may come with a delay.
-  static Stream<StepCount> get stepCountStream => _stepCountChannel.receiveBroadcastStream().map((event) => StepCount._(event));
+  static Stream<StepCount> get stepCountStream => _stepCountChannel
+      .receiveBroadcastStream()
+      .map((event) => StepCount._(event));
 
   /// Returns the daily steps.
   /// Events may come with a delay.
-  static Stream<StepCount> get dailyStepCountStream => _dailyStepCountChannel.receiveBroadcastStream().map((event) => StepCount._(event));
+  static Stream<StepCount> get dailyStepCountStream => _dailyStepCountChannel
+      .receiveBroadcastStream()
+      .map((event) => StepCount._(event));
 }
 
 /// A DTO for steps taken containing the number of steps taken.
@@ -79,7 +90,8 @@ class StepCount {
   DateTime get timeStamp => _timeStamp;
 
   @override
-  String toString() => 'Steps taken: $_steps at ${_timeStamp.toIso8601String()}';
+  String toString() =>
+      'Steps taken: $_steps at ${_timeStamp.toIso8601String()}';
 }
 
 /// A DTO for steps taken containing a detected step and its corresponding
@@ -89,7 +101,10 @@ class PedestrianStatus {
   static const _STOPPED = 'stopped';
   static const _UNKNOWN = 'unknown';
 
-  static const Map<int, String> _STATUSES = {_stopped: _STOPPED, _walking: _WALKING};
+  static const Map<int, String> _STATUSES = {
+    _stopped: _STOPPED,
+    _walking: _WALKING
+  };
 
   late DateTime _timeStamp;
   String _status = _UNKNOWN;

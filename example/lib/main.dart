@@ -73,13 +73,17 @@ class _MyAppState extends State<MyApp> {
 
   void initPlatformState() {
     _pedestrianStatusStream = DailyPedometer2.pedestrianStatusStream;
-    _pedestrianStatusStream.listen(onPedestrianStatusChanged).onError(onPedestrianStatusError);
+    _pedestrianStatusStream
+        .listen(onPedestrianStatusChanged)
+        .onError(onPedestrianStatusError);
 
     _stepCountStream = DailyPedometer2.stepCountStream;
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
 
     _dailyStepCountStream = DailyPedometer2.dailyStepCountStream;
-    _dailyStepCountStream.listen(onDailyStepCount).onError(onDailyStepCountError);
+    _dailyStepCountStream
+        .listen(onDailyStepCount)
+        .onError(onDailyStepCountError);
 
     if (!mounted) return;
   }
@@ -136,7 +140,9 @@ class _MyAppState extends State<MyApp> {
               Center(
                 child: Text(
                   _status,
-                  style: _status == 'walking' || _status == 'stopped' ? TextStyle(fontSize: 30) : TextStyle(fontSize: 20, color: Colors.red),
+                  style: _status == 'walking' || _status == 'stopped'
+                      ? TextStyle(fontSize: 30)
+                      : TextStyle(fontSize: 20, color: Colors.red),
                 ),
               )
             ],
