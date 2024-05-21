@@ -1,3 +1,7 @@
+## 1.1.3
+
+-   Fixed initial step count persistence issue across app restarts.
+
 ## 1.1.2
 
 -   fixed dependencies

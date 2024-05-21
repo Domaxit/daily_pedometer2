@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:daily_pedometer2/daily_pedometer2.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 String formatDate(DateTime d) {
   return d.toString().substring(0, 19);
@@ -71,7 +74,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void initPlatformState() {
+  void initPlatformState() async {
+    log('INITIALIZING THE STREAMS');
+
+    if (await Permission.activityRecognition.isDenied) {
+      await Permission.activityRecognition.request();
+    }
+    if (!await Permission.activityRecognition.isGranted) return;
     _pedestrianStatusStream = DailyPedometer2.pedestrianStatusStream;
     _pedestrianStatusStream
         .listen(onPedestrianStatusChanged)
