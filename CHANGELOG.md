@@ -1,3 +1,7 @@
+## 1.1.0
+
+-   android support
+
 ## 1.0.9
 
 -   added daily step counter channel

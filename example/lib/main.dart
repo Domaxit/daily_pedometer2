@@ -17,14 +17,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Stream<StepCount> _dailyStepCountStream;
   late Stream<StepCount> _stepCountStream;
   late Stream<PedestrianStatus> _pedestrianStatusStream;
-  String _status = '?', _steps = '?';
+  String _status = '?', _steps = '?', _dailySteps = '?';
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
+  }
+
+  void onDailyStepCount(StepCount event) {
+    print(event);
+    setState(() {
+      _dailySteps = event.steps.toString();
+    });
   }
 
   void onStepCount(StepCount event) {
@@ -56,12 +64,22 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void onDailyStepCountError(error) {
+    print('onDailyStepCountError: $error');
+    setState(() {
+      _dailySteps = 'Daily Step Count not available';
+    });
+  }
+
   void initPlatformState() {
     _pedestrianStatusStream = DailyPedometer2.pedestrianStatusStream;
     _pedestrianStatusStream.listen(onPedestrianStatusChanged).onError(onPedestrianStatusError);
 
     _stepCountStream = DailyPedometer2.stepCountStream;
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
+
+    _dailyStepCountStream = DailyPedometer2.dailyStepCountStream;
+    _dailyStepCountStream.listen(onDailyStepCount).onError(onDailyStepCountError);
 
     if (!mounted) return;
   }
@@ -73,7 +91,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Pedometer Example'),
         ),
-        body: Center(
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -83,6 +101,19 @@ class _MyAppState extends State<MyApp> {
               ),
               Text(
                 _steps,
+                style: TextStyle(fontSize: 60),
+              ),
+              Divider(
+                height: 100,
+                thickness: 0,
+                color: Colors.white,
+              ),
+              Text(
+                'Daily Steps',
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                _dailySteps,
                 style: TextStyle(fontSize: 60),
               ),
               Divider(
