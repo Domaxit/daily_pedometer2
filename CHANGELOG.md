@@ -1,3 +1,7 @@
+## 1.1.1
+
+-   fixed android bugs
+
 ## 1.1.0
 
 -   android support

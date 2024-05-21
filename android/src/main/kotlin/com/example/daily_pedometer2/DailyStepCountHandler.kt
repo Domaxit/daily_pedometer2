@@ -27,11 +27,10 @@ class DailyStepCountHandler() : EventChannel.StreamHandler {
     
     constructor(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) : this() {
         this.context = flutterPluginBinding.applicationContext
-        this.flutterPluginBinding = flutterPluginBinding
         this.sharedPrefs = context.getSharedPreferences("pedometerPrefs", Context.MODE_PRIVATE)
-        
         sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         stepCounterSensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        this.flutterPluginBinding = flutterPluginBinding
 
         // Load saved step count at initialization
         dailyStepCount = sharedPrefs.getInt("dailyStepCount", 0);
@@ -42,8 +41,9 @@ class DailyStepCountHandler() : EventChannel.StreamHandler {
             initialStepCount = -1
             sharedPrefs.edit().putLong("lastSavedDate", System.currentTimeMillis()).apply();
         }
-
-        sensorEventListener = object : SensorEventListener {
+    }
+    private fun getDailyEventListener(events: EventChannel.EventSink): SensorEventListener? {
+        return object : SensorEventListener {
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
             override fun onSensorChanged(event: SensorEvent?) {
@@ -55,6 +55,7 @@ class DailyStepCountHandler() : EventChannel.StreamHandler {
                     dailyStepCount = currentStepCount - initialStepCount
                     // Save the updated step count
                     sharedPrefs.edit().putInt("dailyStepCount", dailyStepCount).apply();
+                    events!!.success(dailyStepCount)
                 }
             }
         }
@@ -70,8 +71,8 @@ class DailyStepCountHandler() : EventChannel.StreamHandler {
         if (stepCounterSensor == null) {
             events!!.error("1", "DailyStepCount not available", "DailyStepCount is not available on this device");
         } else {
+            sensorEventListener = getDailyEventListener(events!!);
             sensorManager!!.registerListener(sensorEventListener, stepCounterSensor, SensorManager.SENSOR_DELAY_FASTEST);
-            events!!.success(dailyStepCount)
         }
     }
 

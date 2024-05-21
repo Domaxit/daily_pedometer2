@@ -4,9 +4,7 @@ THIS PACKAGE IS FORKED FROM https://pub.dartlang.org/packages/pedometer
 
 [![pub package](https://img.shields.io/pub/v/pedometer.svg)](https://pub.dartlang.org/packages/pedometer)
 
-This plugin allows for continuous step counting and pedestrian status using the built-in pedometer sensor API of iOS and Android devices.
-
-![](https://raw.githubusercontent.com/cph-cachet/flutter-plugins/master/packages/pedometer/imgs/screenshots.png)
+This plugin allows for continuous step counting, daily step counting and pedestrian status using the built-in pedometer sensor API of iOS and Android devices.
 
 ## Permissions
 
@@ -26,6 +24,11 @@ For iOS, add the following entries to your Info.plist file in the Runner xcode p
     <string>processing</string>
 </array>
 ```
+
+## Daily Step Count
+
+The daily step count represents the number of steps taken in that day.
+On Android, any steps taken before installing the application will not be counted.
 
 ## Step Count
 
@@ -54,7 +57,14 @@ Below is shown a more generalized example. Remember to set the required permissi
 
 ```dart
   Stream<StepCount> _stepCountStream;
+  Stream<StepCount> _dailyStepCountStream;
   Stream<PedestrianStatus> _pedestrianStatusStream;
+
+  /// Handle step count changed
+  void onDailyStepCount(StepCount event) {
+    int steps = event.steps;
+    DateTime timeStamp = event.timeStamp;
+  }
 
   /// Handle step count changed
   void onStepCount(StepCount event) {
@@ -68,19 +78,27 @@ Below is shown a more generalized example. Remember to set the required permissi
     DateTime timeStamp = event.timeStamp;
   }
 
-    /// Handle the error
+  /// Handle the error
   void onPedestrianStatusError(error) {}
 
   /// Handle the error
   void onStepCountError(error) {}
 
+  /// Handle the error
+  void onDailyStepCountError(error) {}
+
   Future<void> initPlatformState() async {
     // Init streams
     _pedestrianStatusStream = await Pedometer.pedestrianStatusStream;
     _stepCountStream = await Pedometer.stepCountStream;
+    _dailyStepCountStream = await Pedometer.dailyStepCountStream;
 
     // Listen to streams and handle errors
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
+
+    _dailyStepCountStream
+      .listen(onDailyStepCount)
+      .onError(onDailyStepCountError);
 
     _pedestrianStatusStream
       .listen(onPedestrianStatusChanged)
